@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:50:44 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/17 20:26:43 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/17 21:07:26 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int			min_map(t_point **map, size_t n_rows, size_t n_cols);
 int			max_map(t_point **map, size_t n_rows, size_t n_cols);
 
 // Parse File
-t_point		**parse_file(int fd, size_t n_rows, size_t n_cols);
+void		parse_file(int fd, t_map_params *params);
 
 // extra
 void		free_ft_split(char **str);
