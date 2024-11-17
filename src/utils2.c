@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 20:08:08 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/17 20:08:28 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/17 20:40:55 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	min_map(t_point **map, size_t n_rows, size_t n_cols)
 
 	min = INT_MAX;
 	i = 0;
-	j = 0;
 	while (i < n_rows)
 	{
+		j = 0;
 		while (j < n_cols)
 		{
 			if (map[i][j].z < min)
@@ -42,9 +42,9 @@ int	max_map(t_point **map, size_t n_rows, size_t n_cols)
 
 	max = INT_MIN;
 	i = 0;
-	j = 0;
 	while (i < n_rows)
 	{
+		j = 0;
 		while (j < n_cols)
 		{
 			if (map[i][j].z > max)

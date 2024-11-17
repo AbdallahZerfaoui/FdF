@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:50:44 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/17 19:04:49 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/17 20:26:43 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,18 @@ typedef struct s_data
 	int		x_offset;
 	int		y_offset;
 }			t_data;
+
+typedef struct s_map_params
+{
+	t_point	**map;
+	size_t	zoom_coeff;
+	size_t	step_x;
+	size_t	step_y;
+	size_t	step_z;
+	size_t	n_rows;
+	size_t	n_cols;
+	char	**values;
+}			t_map_params;
 
 // typedef struct s_data
 // {
