@@ -6,7 +6,7 @@ char *get_next_line(int fd)
     static char *remainder = NULL;
     ssize_t     bytes_read = 1;
     char        *new_line_ptr = NULL;
-    char        *line;
+    char        *line = NULL;
 
     if (!remainder)
     {

@@ -1,38 +1,46 @@
 #include "../includes/fdf.h"
 
+
+// The test file must endup with a newline character
 t_point **parse_file(int fd, size_t n_rows, size_t n_cols)
 {
 	// ft_printf("fd in parse: %d\n", fd);
     char *line = get_next_line(fd);
     
     t_point **map = NULL;
-    // size_t n_rows;
-    // size_t n_cols;
-    // get_grid_size(fd, &n_rows, &n_cols);
-	// ft_printf("fd in parse: %d\n", fd);
-	// ft_printf("Xncols: %d\n", (int)n_cols);
-	// ft_printf("Xnrows: %d\n", (int)n_rows);
-    size_t i = n_rows;
+    size_t i = 0;
     size_t j;
+
+	// size_t step_x = WIN_WIDTH / (4 * (n_cols - 1));
+	// size_t step_y = WIN_HEIGHT / (4 * (n_rows - 1));
+	size_t zoom_coeff = 2;
+	size_t step_x = WIN_WIDTH / (zoom_coeff * (MAX(n_rows, n_cols) - 1));
+	size_t step_y = WIN_HEIGHT / (zoom_coeff * (MAX(n_rows, n_cols) - 1));
+	size_t step_z = 2;//(size_t) (MIN(step_x, step_y) / 10);
+
     char **values = NULL;
-	// ft_printf("n_rows: %d\n", (int)n_rows);
+	ft_printf("n_rows: %d --- n_cols: %d\n", (int)n_rows, (int)n_cols);
     // Create a Map
     map = create_map(n_rows, n_cols);
 	// ft_printf("map created\n");
-    while(line && i > 0)
+    while(line && i < n_rows)
     {
-		// ft_printf("i: %d\n", (int)i);
+		ft_printf("i: %d\n", (int)i);
+		ft_printf("line: |%s|\n", line);
         values = ft_split(line, ' ');
         for (j = 0; j < n_cols; j++)
         {
-            map[i-1][j].x = 0;
-            map[i-1][j].y = 0;
-            map[i-1][j].z = ft_atoi(values[j]);
+            map[i][j].x = -1 * i * step_x;
+            map[i][j].y = j * step_y;
+            map[i][j].z = ft_atoi(values[j]) * step_z;
         }
-        i--;
-        free(line);
+        i++;
+        free(line); //checked
 		free_ft_split(values);
+		
         line = get_next_line(fd);
     }
+	if (line)
+		free(line);
     return map;
 }
