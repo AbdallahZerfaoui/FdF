@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:50:44 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/17 21:07:26 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:45:43 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # include "get_next_line.h"
 # include "libft.h"
-# include "libftprintf.h"
+# include "ft_printf.h"
 # include "mlx.h"
 # include <fcntl.h>
 # include <limits.h>
@@ -54,9 +54,9 @@ typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_point	**map; // Map containing your 3D points
-	size_t	n_rows; // Number of rows in the map
-	size_t	n_cols; // Number of columns in the map
+	t_point	**map;
+	size_t	n_rows;
+	size_t	n_cols;
 	int		zoom;
 	int		x_offset;
 	int		y_offset;
@@ -73,6 +73,13 @@ typedef struct s_map_params
 	size_t	n_cols;
 	char	**values;
 }			t_map_params;
+
+typedef struct s_rgb
+{
+	int		red;
+	int		green;
+	int		blue;
+}			t_rgb;
 
 // typedef struct s_data
 // {

@@ -1,7 +1,8 @@
+CC = cc
+RM = rm -f
 EXE = fdf.exe
 LIBNAME = custom_lib.a
 TESTCASE = io/test_logo3.fdf
-CC = gcc
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 # MLX = -L ./minilibx-linux -lmlx -lX11 -lXext -lm
 MLX = -L ./minilibx_macos -lmlx -framework OpenGL -framework AppKit
@@ -36,10 +37,10 @@ parse: all
 	./$(EXE) $(TESTCASE)
 
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-	rm -f $(EXE)
+	$(RM) $(EXE)
 	$(MAKE) --no-print-directory fclean -C $(LIBDIR)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:11 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/17 20:07:49 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/23 18:10:28 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ size_t	count_lines(int fd)
 	int		nbr_lines;
 
 	line = get_next_line(fd);
+	if (!line)
+		return (0);
 	nbr_lines = 0;
 	while (ft_strcmp(line, "") != 0)
 	{
@@ -64,6 +66,8 @@ size_t	count_lines(int fd)
 		}
 		free(line);
 		line = get_next_line(fd);
+		if (!line)
+			break ;
 	}
 	if (line)
 		free(line);

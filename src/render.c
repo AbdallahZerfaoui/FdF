@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:23 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/17 19:55:41 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:27:29 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,41 +78,78 @@ void	draw_line(t_data *data, t_2d_point p1, t_2d_point p2, int color)
 	}
 }
 
+/**
+ * @brief return a nuance of color depending on the z value
+ * @param z the z value
+ * @param data the data structure
+ * @return the color
+ */
 int	get_color(int z, t_data *data)
 {
 	double	ratio;
 	int		min_z;
 	int		max_z;
+	t_rgb	rgb;
 
-	int red, green, blue;
-	// Simple gradient from blue (low) to red (high)
 	min_z = min_map(data->map, data->n_rows, data->n_cols);
 	max_z = max_map(data->map, data->n_rows, data->n_cols);
 	ratio = (double)(z - min_z) / (max_z - min_z);
-	// Interpolate between blue and red
-	red = (int)(255 * ratio);        // Red increases as z increases
-	green = 0;                       // No green in the gradient
-	blue = (int)(255 * (1 - ratio)); // Blue decreases as z increases
-	// Combine red, green, and blue into an RGB value (0xRRGGBB)
-	return ((red << 16) | (green << 8) | blue);
+	rgb.red = (int)(255 * ratio);
+	rgb.green = 0;
+	rgb.blue = (int)(255 * (1 - ratio));
+	return ((rgb.red << 16) | (rgb.green << 8) | rgb.blue);
 }
+
+t_2d_point	draw_elem_from_data(t_data *data, int i, int j, int color)
+{
+	t_2d_point	p;
+
+	p = isometric_projection(data->map[i][j], data->zoom, data->x_offset,
+			data->y_offset);
+	draw_pixel(data, (int)p.iso_x, (int)p.iso_y, color);
+	return (p);
+}
+
+void	draw_line_from_p1_H(t_data *data, int i, int j, int color)
+{
+	t_2d_point	p1;
+	t_2d_point	p2;
+
+	p1 = isometric_projection(data->map[i][j], data->zoom,
+			data->x_offset, data->y_offset);
+	p2 = isometric_projection(data->map[i][j + 1], data->zoom,
+			data->x_offset, data->y_offset);
+	draw_line(data, p1, p2, color);
+}
+
+void	draw_line_from_p1_V(t_data *data, t_2d_point p1, int color)
+{
+	t_2d_point	p2;
+
+	p2 = isometric_projection(data->map[p1.iso_x + 1][p1.iso_y], data->zoom,
+			data->x_offset, data->y_offset);
+	draw_line(data, p1, p2, color);
+}
+
 
 void	render_map(t_data *data)
 {
 	t_2d_point	p1;
 	t_2d_point	p2;
 	int			color;
+	size_t		i;
+	size_t		j;
 
 	color = WHITE;
-	for (size_t i = 0; i < data->n_rows; i++)
+	i = 0;
+	while (i < data->n_rows)
 	{
-		for (size_t j = 0; j < data->n_cols; j++)
+		j = 0;
+		while (j < data->n_cols)
 		{
 			color = get_color(data->map[i][j].z, data);
 			printf("color for z: %d is: %x\n", data->map[i][j].z, color);
-			p1 = isometric_projection(data->map[i][j], data->zoom,
-					data->x_offset, data->y_offset);
-			draw_pixel(data, (int)p1.iso_x, (int)p1.iso_y, color);
+			p1 = draw_elem_from_data(data, i, j, color);
 			if (j + 1 < data->n_cols)
 			{
 				p2 = isometric_projection(data->map[i][j + 1], data->zoom,
@@ -125,6 +162,8 @@ void	render_map(t_data *data)
 						data->x_offset, data->y_offset);
 				draw_line(data, p1, p2, color);
 			}
+			j++;
 		}
+		i++;
 	}
 }

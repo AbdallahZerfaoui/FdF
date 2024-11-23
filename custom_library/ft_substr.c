@@ -1,57 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/07 20:55:25 by azerfaou          #+#    #+#             */
+/*   Updated: 2024/10/25 13:02:28 by azerfaou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/libft.h"
 
-// static size_t	ft_strlen(const char *s)
-// {
-//     size_t	size;
-
-//     size = 0;
-//     while (*s)
-//     {
-//         size++;
-//         s++;
-//     }
-//     return (size);
-// }
-
-// char	*ft_strdup(const char *s)
-// {
-//     char	*ptr;
-//     size_t	size;
-
-//     size = 0;
-//     while (s[size])
-//         size++;
-//     ptr = (char *)malloc(size + 1);
-//     if (!ptr)
-//         return (NULL);
-//     size = 0;
-//     while (s[size])
-//     {
-//         ptr[size] = s[size];
-//         size++;
-//     }
-//     ptr[size] = '\0';
-//     return (ptr);
-// }
-
-char *ft_substr(char const *s, unsigned int start, size_t len)
+static char	*ft_strncpy(char *destination, const char *source, size_t n)
 {
-    char *str_result;
-    size_t i;
+	size_t	i;
 
-    if (!s || start > ft_strlen(s) || len == 0)
-        return (NULL);
-    // if (start > ft_strlen(s))
-    //     return (ft_strdup(""));
-    str_result = (char *)malloc(sizeof(char) * (len + 1));
-    if (!str_result)
-        return (NULL);
-    i = 0;
-    while (i < len && s[start + i])
-    {
-        str_result[i] = s[start + i];
-        i++;
-    }
-    str_result[i] = '\0';
-    return (str_result);
+	i = 0;
+	while (source[i] && i < n)
+	{
+		destination[i] = source[i];
+		i++;
+	}
+	while (i < n)
+	{
+		destination[i] = '\0';
+		i++;
+	}
+	return (destination);
 }
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*str_result;
+	size_t	s_len;
+
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (len == 0 || start > s_len)
+		return (ft_calloc(1, sizeof(char)));
+	if ((start + len) > s_len)
+		len = s_len - start;
+	str_result = (char *)ft_calloc(len + 1, sizeof(char));
+	if (!str_result)
+		return (NULL);
+	str_result = ft_strncpy(str_result, s + start, len);
+	return (str_result);
+}
+
+// int main()
+// {
+// 	printf("case 3 : %s\n", ft_substr("", 0, 1));
+// 	printf("case 9 : %s\n", ft_substr("hola", 0, 3));
+// }
