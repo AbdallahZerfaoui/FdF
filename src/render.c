@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:23 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 16:44:32 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:42:02 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,9 @@ void	draw_line(t_data *data, t_2d_point p1, t_2d_point p2, int color)
  * @param z the z value
  * @param data the data structure
  * @return the color
+ * @note You can call this function with a data or params structure
  */
-int	get_color(int z, t_data *data)
+int	get_color(int z, t_map_params *data)
 {
 	double	ratio;
 	int		min_z;
@@ -132,7 +133,6 @@ void	draw_line_from_p1_V(t_data *data, t_2d_point p1, int color)
 	draw_line(data, p1, p2, color);
 }
 
-
 void	render_map(t_data *data)
 {
 	t_2d_point	p1;
@@ -148,8 +148,8 @@ void	render_map(t_data *data)
 		j = 0;
 		while (j < data->n_cols)
 		{
-			color = get_color(data->map[i][j].z, data);
-			ft_printf("color for z: %d is: %x\n", data->map[i][j].z, color);
+			color = data->colors_map[i][j]; //get_color(data->map[i][j].z, data);
+			// ft_printf("color for z: %d is: %x\n", data->map[i][j].z, color);
 			p1 = draw_elem_from_data(data, i, j, color);
 			if (j + 1 < data->n_cols)
 			{

@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:36 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 16:39:50 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:07:33 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	fill_data(t_data *data, t_map_params *params)
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FDF");
 	data->map = params->map;
+	data->colors_map = params->colors_map;
 	data->n_rows = params->n_rows;
 	data->n_cols = params->n_cols;
 	data->zoom = 1;

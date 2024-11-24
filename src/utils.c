@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:11 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 15:57:35 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:49:58 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,30 @@ t_point	**create_map(size_t n_rows, size_t n_cols)
 	while (i < n_rows)
 	{
 		map[i] = (t_point *)malloc(n_cols * sizeof(t_point));
+		if (!map[i])
+		{
+			while (i-- > 0)
+				free(map[i]);
+			free(map);
+			return (NULL);
+		}
+		i++;
+	}
+	return (map);
+}
+
+int	**create_colors_map(size_t n_rows, size_t n_cols)
+{
+	int		**map;
+	size_t	i;
+
+	i = 0;
+	map = (int **)malloc(n_rows * sizeof(int *));
+	if (!map)
+		return (NULL);
+	while (i < n_rows)
+	{
+		map[i] = (int *)malloc(n_cols * sizeof(int));
 		if (!map[i])
 		{
 			while (i-- > 0)

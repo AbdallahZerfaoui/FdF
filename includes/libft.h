@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:36:19 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 15:54:17 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:17:32 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void				*ft_memchr(const void *str, int c, size_t n);
 char				*ft_strnstr(const char *haystack, const char *needle,
 						size_t len);
 int					ft_atoi(const char *str);
+int					ft_atoi_base(const char *str, int str_base);
 void				*ft_calloc(size_t nitems, size_t size);
 char				*ft_strdup(const char *s);
 
