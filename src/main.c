@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:36 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 13:53:31 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 16:39:50 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	main(int argc, char **argv)
 	}
 	fill_data(&data, &params);
 	render_map(&data);
+	mlx_hook(data.win_ptr, 2, 1L << 0, handle_keypress, &data);
+	mlx_hook(data.win_ptr, 17, 0L, handle_destroy, &data);
 	mlx_loop(data.mlx_ptr);
 	close(fd);
 	free_map(params.map, params.n_rows);

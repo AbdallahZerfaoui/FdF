@@ -2,7 +2,7 @@ CC = cc -g
 RM = rm -f
 EXE = fdf.exe
 LIBNAME = custom_lib.a
-TESTCASE = io/test_logo3.fdf # io/test_logo3.fdf
+TESTCASE = io/test_maps/pnp_flat_.fdf
 CFLAGS = -Wall -Wextra -Werror
 VFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
 # MLX = -L ./minilibx-linux -lmlx -lX11 -lXext -lm

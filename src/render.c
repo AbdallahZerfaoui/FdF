@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:23 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 13:54:33 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 16:44:32 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,11 @@ int	get_color(int z, t_data *data)
 	int		max_z;
 	t_rgb	rgb;
 
+	ratio = 0;
 	min_z = min_map(data->map, data->n_rows, data->n_cols);
 	max_z = max_map(data->map, data->n_rows, data->n_cols);
-	ratio = (double)(z - min_z) / (max_z - min_z);
+	if (min_z != max_z)
+		ratio = (double)(z - min_z) / (max_z - min_z);
 	rgb.red = (int)(255 * ratio);
 	rgb.green = 0;
 	rgb.blue = (int)(255 * (1 - ratio));

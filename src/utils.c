@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:11 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/23 18:10:28 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 15:57:35 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	get_grid_size(int fd, size_t *ptr_rows, size_t *ptr_cols)
 	char	*line;
 
 	line = get_next_line(fd);
-	*ptr_cols = count_char_occurrences(line, ' ') + 1;
+	*ptr_cols = count_words(line, ' ');
 	*ptr_rows = count_lines(fd) + 1;
 	free(line);
 }

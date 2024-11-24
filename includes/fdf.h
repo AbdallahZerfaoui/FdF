@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:50:44 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 13:54:59 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:16:53 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # define RED 0xFF0000
 # define WHITE 0xFFFFFF
 # define BLUE 0x0000FF
+# define ESC_KEY 53
+
+
 
 # define MIN(x, y) (((x) < (y)) ? (x) : (y))
 # define MAX(x, y) (((x) > (y)) ? (x) : (y))
@@ -122,4 +125,8 @@ void		draw_pixel(t_data *data, int x, int y, int color);
 int			get_color(int z, t_data *data);
 void		render_map(t_data *data);
 
+// Events
+int			handle_keypress(int keysym, t_data *data);
+int			handle_destroy(t_data *data);
+void		clean_exit(t_data *data);
 #endif

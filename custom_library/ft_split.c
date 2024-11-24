@@ -6,13 +6,13 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:52:00 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/10/25 13:02:28 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 15:52:28 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-static size_t	count_words(char const *str, char c)
+size_t	count_words(char const *str, char c)
 {
 	size_t	len;
 	int		is_new_word;

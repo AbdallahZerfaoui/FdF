@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:36:19 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/23 17:50:26 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 15:54:17 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ void				*ft_calloc(size_t nitems, size_t size);
 char				*ft_strdup(const char *s);
 
 // Addictional functions (11)
+// count_words is used in ft_split and i added it to the libft.h for FdF project
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
+size_t				count_words(char const *str, char c);
 char				*ft_itoa(int value);
 char				*ft_strmapi(char const *s, char (*func)(unsigned int,
 							char));
