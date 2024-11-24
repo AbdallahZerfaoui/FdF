@@ -6,12 +6,11 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:23 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/23 17:27:29 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 13:54:33 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h>
 
 /**
  * @note the +180 in the angle is to rotate the map 180 degrees
@@ -148,7 +147,7 @@ void	render_map(t_data *data)
 		while (j < data->n_cols)
 		{
 			color = get_color(data->map[i][j].z, data);
-			printf("color for z: %d is: %x\n", data->map[i][j].z, color);
+			ft_printf("color for z: %d is: %x\n", data->map[i][j].z, color);
 			p1 = draw_elem_from_data(data, i, j, color);
 			if (j + 1 < data->n_cols)
 			{
