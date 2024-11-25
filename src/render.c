@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:23 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 21:34:07 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:10:22 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_2d_point	isometric_projection(t_point point, int zoom, int x_offset,
 		+ y_offset;
 	return (iso_point);
 }
-
-
 
 /**
  * @brief return a nuance of color depending on the z value
@@ -82,7 +80,6 @@ int	get_color(int z, t_map_params *data)
 void	render_map(t_data *data)
 {
 	t_2d_point	p1;
-	// t_2d_point	p2;
 	int			color;
 	size_t		i;
 	size_t		j;
@@ -91,29 +88,11 @@ void	render_map(t_data *data)
 	while (i < data->n_rows)
 	{
 		j = 0;
-		// while(i == 0 && j < 16)
-		// {
-		// 	printf("map[%zu][%zu] = %d\n", i, j, data->colors_map[i][j]);
-		// 	j++;
-		// }
-		// j = 0;
 		while (j < data->n_cols)
 		{
 			color = data->colors_map[i][j];
-			p1 = draw_elem_from_data(data, i, j, color); //change the name of the function because it does not draw only
-			// if (j + 1 < data->n_cols)
-			// {
-			// 	p2 = isometric_projection(data->map[i][j + 1], data->zoom,
-			// 			data->x_offset, data->y_offset);
-			// 	draw_line(data, p1, p2, color);
-			// }
+			p1 = draw_elem_from_data(data, i, j, color);
 			draw_horizontal_line(data, p1, color);
-			// if (i + 1 < data->n_rows)
-			// {
-			// 	p2 = isometric_projection(data->map[i + 1][j], data->zoom,
-			// 			data->x_offset, data->y_offset);
-			// 	draw_line(data, p1, p2, color);
-			// }
 			draw_vertical_line(data, p1, color);
 			j++;
 		}

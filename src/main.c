@@ -6,20 +6,11 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:36 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 21:21:18 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/25 21:31:08 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-static void	handle_inputs(int argc)
-{
-	if (argc != 2)
-	{
-		perror("Usage: ./fdf <file.fdf>\n");
-		exit (1);
-	}
-}
 
 static int	get_fd(char *file_name)
 {
@@ -27,10 +18,7 @@ static int	get_fd(char *file_name)
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-	{
-		perror("Error\n");
-		exit (1);
-	}
+		display_error();
 	return (fd);
 }
 
@@ -46,7 +34,7 @@ void	fill_data(t_data *data, t_map_params *params)
 	data->colors_map = params->colors_map;
 	data->n_rows = params->n_rows;
 	data->n_cols = params->n_cols;
-	data->zoom = 1;
+	data->zoom = ZOOM;
 	data->x_offset = WIN_WIDTH / 8;
 	data->y_offset = WIN_HEIGHT / 2;
 }
@@ -66,10 +54,7 @@ int	main(int argc, char **argv)
 	fd = get_fd(file_name);
 	parse_file(fd, &params);
 	if (!params.map)
-	{
-		perror("Error\n");
-		return (1);
-	}
+		display_error();
 	fill_data(&data, &params);
 	render_map(&data);
 	mlx_hook(data.win_ptr, 2, 1L << 0, handle_keypress, &data);

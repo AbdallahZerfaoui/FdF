@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:30 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 21:31:09 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:09:03 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static void	init_map_params(t_map_params *params)
 {
 	params->map = NULL;
 	params->zoom_coeff = 2;
-	params->step_x = WIN_WIDTH / (params->zoom_coeff * (MAX(params->n_rows,
+	params->step_x = WIN_WIDTH / (params->zoom_coeff * (ft_max(params->n_rows,
 					params->n_cols) - 1));
-	params->step_y = WIN_HEIGHT / (params->zoom_coeff * (MAX(params->n_rows,
+	params->step_y = WIN_HEIGHT / (params->zoom_coeff * (ft_max(params->n_rows,
 					params->n_cols) - 1));
-	params->step_z = 2;
+	params->step_z = STEP_Z;
 	params->values = NULL;
 }
 
@@ -43,8 +43,6 @@ static void	process_map_element(t_map_params *params,
 	if (map_element[1] == NULL)
 	{
 		params->colors_map[i][j] = get_color(params->map[i][j].z, params);
-		// if (i == 0 && j < 16)
-		// 	printf("map[%zu][%zu] = %d\n", i, j, params->colors_map[i][j]);
 	}
 	else
 		params->colors_map[i][j] = ft_atoi_base(map_element[1] + 2, 16);

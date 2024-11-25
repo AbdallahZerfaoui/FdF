@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:50:44 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 21:03:07 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:17:32 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@
 # define GRID_COLS 10
 # define OFFSET 50
 # define STEP 25
+# define ZOOM 1
+# define STEP_Z 2
 # define RED 0xFF0000
 # define WHITE 0xFFFFFF
 # define BLUE 0x0000FF
 # define ESC_KEY 53
-
-# define MIN(x, y) (((x) < (y)) ? (x) : (y))
-# define MAX(x, y) (((x) > (y)) ? (x) : (y))
 
 # include "ft_printf.h"
 # include "get_next_line.h"
@@ -123,8 +122,6 @@ void		render_map(t_data *data);
 void		draw_pixel(t_data *data, int x, int y, int color);
 void		draw_line(t_data *data, t_2d_point p1, t_2d_point p2, int color);
 t_2d_point	draw_elem_from_data(t_data *data, int i, int j, int color);
-// void		draw_line_from_p1_h(t_data *data, int i, int j, int color);
-// void		draw_line_from_p1_v(t_data *data, t_2d_point p1, int color);
 void		draw_horizontal_line(t_data *data, t_2d_point p1, int color);
 void		draw_vertical_line(t_data *data, t_2d_point p1, int color);
 
@@ -132,4 +129,12 @@ void		draw_vertical_line(t_data *data, t_2d_point p1, int color);
 int			handle_keypress(int keysym, t_data *data);
 int			handle_destroy(t_data *data);
 void		clean_exit(t_data *data);
+
+// Maths
+size_t		ft_min(size_t a, size_t b);
+size_t		ft_max(size_t a, size_t b);
+
+// Errors
+void		display_error(void);
+void		handle_inputs(int argc);
 #endif
