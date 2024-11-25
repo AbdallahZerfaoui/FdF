@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 20:08:08 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/17 20:40:55 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 19:31:52 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,17 @@ int	max_map(t_point **map, size_t n_rows, size_t n_cols)
 		i++;
 	}
 	return (max);
+}
+
+void	free_ft_split(char **str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }

@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:36 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 18:07:33 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 21:21:18 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	handle_inputs(int argc)
 {
 	if (argc != 2)
 	{
-		ft_printf("Usage: ./fdf <file.fdf>\n");
+		perror("Usage: ./fdf <file.fdf>\n");
 		exit (1);
 	}
 }
@@ -28,7 +28,7 @@ static int	get_fd(char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Error\n");
+		perror("Error\n");
 		exit (1);
 	}
 	return (fd);
@@ -67,7 +67,7 @@ int	main(int argc, char **argv)
 	parse_file(fd, &params);
 	if (!params.map)
 	{
-		ft_printf("Error\n");
+		perror("Error\n");
 		return (1);
 	}
 	fill_data(&data, &params);
@@ -76,6 +76,8 @@ int	main(int argc, char **argv)
 	mlx_hook(data.win_ptr, 17, 0L, handle_destroy, &data);
 	mlx_loop(data.mlx_ptr);
 	close(fd);
-	free_map(params.map, params.n_rows);
-	return (0);
+	free_map((void **)params.map, params.n_rows);
+	free_map((void **)data.map, data.n_rows);
+	free_map((void **)params.colors_map, params.n_rows);
+	free_map((void **)data.colors_map, data.n_rows);
 }

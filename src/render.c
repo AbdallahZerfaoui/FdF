@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:23 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 18:42:02 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 21:34:07 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_2d_point	isometric_projection(t_point point, int zoom, int x_offset,
 	t_2d_point	iso_point;
 	double		angle;
 
+	iso_point.i = 0;
+	iso_point.j = 0;
 	angle = (30 + 180) * (4 * atan(1) / 180);
 	iso_point.iso_x = (point.x - point.y) * cos(angle) * zoom + x_offset;
 	iso_point.iso_y = ((point.x + point.y) * sin(angle) - point.z) * zoom
@@ -28,54 +30,7 @@ t_2d_point	isometric_projection(t_point point, int zoom, int x_offset,
 	return (iso_point);
 }
 
-void	draw_pixel(t_data *data, int x, int y, int color)
-{
-	int	i;
-	int	j;
 
-	i = 0;
-	j = 0;
-	while (i < PIXEL_SIZE)
-	{
-		while (j < PIXEL_SIZE)
-		{
-			mlx_pixel_put(data->mlx_ptr, data->win_ptr, x + i, y + j, color);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	draw_line(t_data *data, t_2d_point p1, t_2d_point p2, int color)
-{
-	int	delta_x;
-	int	delta_y;
-	int	sign_x;
-	int	sign_y;
-	int	error;
-	int	error2;
-
-	delta_x = abs(p2.iso_x - p1.iso_x);
-	delta_y = abs(p2.iso_y - p1.iso_y);
-	sign_x = p1.iso_x < p2.iso_x ? 1 : -1;
-	sign_y = p1.iso_y < p2.iso_y ? 1 : -1;
-	error = delta_x - delta_y;
-	while (p1.iso_x != p2.iso_x || p1.iso_y != p2.iso_y)
-	{
-		draw_pixel(data, p1.iso_x, p1.iso_y, color);
-		error2 = error * 2;
-		if (error2 > -delta_y)
-		{
-			error -= delta_y;
-			p1.iso_x += sign_x;
-		}
-		if (error2 < delta_x)
-		{
-			error += delta_x;
-			p1.iso_y += sign_y;
-		}
-	}
-}
 
 /**
  * @brief return a nuance of color depending on the z value
@@ -102,67 +57,64 @@ int	get_color(int z, t_map_params *data)
 	return ((rgb.red << 16) | (rgb.green << 8) | rgb.blue);
 }
 
-t_2d_point	draw_elem_from_data(t_data *data, int i, int j, int color)
-{
-	t_2d_point	p;
-
-	p = isometric_projection(data->map[i][j], data->zoom, data->x_offset,
-			data->y_offset);
-	draw_pixel(data, (int)p.iso_x, (int)p.iso_y, color);
-	return (p);
-}
-
-void	draw_line_from_p1_H(t_data *data, int i, int j, int color)
-{
-	t_2d_point	p1;
-	t_2d_point	p2;
-
-	p1 = isometric_projection(data->map[i][j], data->zoom,
-			data->x_offset, data->y_offset);
-	p2 = isometric_projection(data->map[i][j + 1], data->zoom,
-			data->x_offset, data->y_offset);
-	draw_line(data, p1, p2, color);
-}
-
-void	draw_line_from_p1_V(t_data *data, t_2d_point p1, int color)
-{
-	t_2d_point	p2;
-
-	p2 = isometric_projection(data->map[p1.iso_x + 1][p1.iso_y], data->zoom,
-			data->x_offset, data->y_offset);
-	draw_line(data, p1, p2, color);
-}
-
+/**
+ * render_map - Renders a 2D representation of the map by projecting 3D points 
+ *			into isometric coordinates and drawing lines between them.
+ *
+ * @data: A pointer to the data structure containing the map, colors, and other
+ *		rendering parameters such as zoom and offsets.
+ *
+ * Description:
+ * This function iterates over each point in the map grid and:
+ * - Projects each 3D map point into a 2D isometric point using the 
+ *   `isometric_projection` function.
+ * - Draws lines horizontally and vertically between adjacent points in the grid.
+ *
+ * For each grid point:
+ * - The color of the point is determined from `colors_map`.
+ * - Lines are drawn:
+ *   - Horizontally to the next point in the same row (if it exists).
+ *   - Vertically to the corresponding point in the next row (if it exists).
+ *
+ * This effectively creates a wireframe representation of the map in an isometric
+ * view, rendered on the graphical window.
+ */
 void	render_map(t_data *data)
 {
 	t_2d_point	p1;
-	t_2d_point	p2;
+	// t_2d_point	p2;
 	int			color;
 	size_t		i;
 	size_t		j;
 
-	color = WHITE;
 	i = 0;
 	while (i < data->n_rows)
 	{
 		j = 0;
+		// while(i == 0 && j < 16)
+		// {
+		// 	printf("map[%zu][%zu] = %d\n", i, j, data->colors_map[i][j]);
+		// 	j++;
+		// }
+		// j = 0;
 		while (j < data->n_cols)
 		{
-			color = data->colors_map[i][j]; //get_color(data->map[i][j].z, data);
-			// ft_printf("color for z: %d is: %x\n", data->map[i][j].z, color);
-			p1 = draw_elem_from_data(data, i, j, color);
-			if (j + 1 < data->n_cols)
-			{
-				p2 = isometric_projection(data->map[i][j + 1], data->zoom,
-						data->x_offset, data->y_offset);
-				draw_line(data, p1, p2, color);
-			}
-			if (i + 1 < data->n_rows)
-			{
-				p2 = isometric_projection(data->map[i + 1][j], data->zoom,
-						data->x_offset, data->y_offset);
-				draw_line(data, p1, p2, color);
-			}
+			color = data->colors_map[i][j];
+			p1 = draw_elem_from_data(data, i, j, color); //change the name of the function because it does not draw only
+			// if (j + 1 < data->n_cols)
+			// {
+			// 	p2 = isometric_projection(data->map[i][j + 1], data->zoom,
+			// 			data->x_offset, data->y_offset);
+			// 	draw_line(data, p1, p2, color);
+			// }
+			draw_horizontal_line(data, p1, color);
+			// if (i + 1 < data->n_rows)
+			// {
+			// 	p2 = isometric_projection(data->map[i + 1][j], data->zoom,
+			// 			data->x_offset, data->y_offset);
+			// 	draw_line(data, p1, p2, color);
+			// }
+			draw_vertical_line(data, p1, color);
 			j++;
 		}
 		i++;

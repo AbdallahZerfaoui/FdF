@@ -2,7 +2,7 @@ CC = cc -g
 RM = rm -f
 EXE = fdf.exe
 LIBNAME = custom_lib.a
-TESTCASE = io/test_maps/t2_.fdf
+TESTCASE = io/test_maps/42.fdf
 CFLAGS = -Wall -Wextra -Werror
 VFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
 # MLX = -L ./minilibx-linux -lmlx -lX11 -lXext -lm
@@ -13,7 +13,7 @@ SRCDIR = src
 LIBDIR = custom_library
 INCLUDES = includes
 
-SRCS = events.c main.c parse_file.c render.c utils.c utils2.c
+SRCS = events.c main.c parse_file.c render.c utils.c utils2.c draw.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS = $(SRCS:.c=.o)
 

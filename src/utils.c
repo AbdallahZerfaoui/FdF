@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:11 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/24 17:49:58 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/24 21:25:09 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ t_point	**create_map(size_t n_rows, size_t n_cols)
 	size_t	i;
 
 	i = 0;
-	map = (t_point **)malloc(n_rows * sizeof(t_point *));
+	map = (t_point **)ft_calloc(n_rows, sizeof(t_point *));
 	if (!map)
 		return (NULL);
 	while (i < n_rows)
 	{
-		map[i] = (t_point *)malloc(n_cols * sizeof(t_point));
+		map[i] = (t_point *)ft_calloc(n_cols, sizeof(t_point));
 		if (!map[i])
 		{
 			while (i-- > 0)
@@ -42,12 +42,12 @@ int	**create_colors_map(size_t n_rows, size_t n_cols)
 	size_t	i;
 
 	i = 0;
-	map = (int **)malloc(n_rows * sizeof(int *));
+	map = (int **)ft_calloc(n_rows, sizeof(int *));
 	if (!map)
 		return (NULL);
 	while (i < n_rows)
 	{
-		map[i] = (int *)malloc(n_cols * sizeof(int));
+		map[i] = (int *)ft_calloc(n_cols, sizeof(int));
 		if (!map[i])
 		{
 			while (i-- > 0)
@@ -60,7 +60,7 @@ int	**create_colors_map(size_t n_rows, size_t n_cols)
 	return (map);
 }
 
-void	free_map(t_point **map, size_t n_rows)
+void	free_map(void **map, size_t n_rows)
 {
 	size_t	i;
 
@@ -110,17 +110,4 @@ void	get_grid_size(int fd, size_t *ptr_rows, size_t *ptr_cols)
 	*ptr_cols = count_words(line, ' ');
 	*ptr_rows = count_lines(fd) + 1;
 	free(line);
-}
-
-void	free_ft_split(char **str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
 }
