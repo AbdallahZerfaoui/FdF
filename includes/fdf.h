@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:50:44 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/25 19:17:32 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:10:35 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_rgb
 t_point		**create_map(size_t n_rows, size_t n_cols);
 int			**create_colors_map(size_t n_rows, size_t n_cols);
 void		free_map(void **map, size_t n_rows);
+void		free_all_maps(t_data *data, t_map_params *params);
 size_t		count_lines(int fd);
 void		get_grid_size(int fd, size_t *ptr_rows, size_t *ptr_cols);
 int			min_map(t_point **map, size_t n_rows, size_t n_cols);
