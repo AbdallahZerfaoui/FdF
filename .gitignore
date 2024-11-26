@@ -1,3 +1,4 @@
+.gitignore
 .vscode
 *.py
 *.a *.o *.exe

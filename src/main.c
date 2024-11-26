@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:36 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/26 17:05:48 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/26 20:25:43 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,15 @@ void	fill_data(t_data *data, t_map_params *params)
  * 2. Get the file name from the arguments
  * 3. Get the file descriptor using the file name
  * 4. Get the grid size from the file using getnextline
- * 5. Close the file descriptor because we have already read it till the end
- * 6. Get the file descriptor again so we can read it from the beginning again
+ * 5. Close the file descriptor because we have already 
+ * 	read it till the end
+ * 6. Get the file descriptor again so we can read it from 
+ * 	the beginning again
  * 7. Parse the file and fill the struct params
- * 8. If the map or the colors_map are NULL, then free, display an error and exit
- * 9. Fill the data struct with the values from the params struct
+ * 8. If the map or the colors_map are NULL, then free, 
+ * 	display an error and exit
+ * 9. Fill the data struct with the values from the params struct 
+ * 	(the MLX_INIT is done here)
  * 10. Render the map
  * 11. Handle the keypress event and the destroy event
  * 12. Loop the mlx so the window stays open
