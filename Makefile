@@ -5,7 +5,7 @@ LIBNAME = custom_lib.a
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 VFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
 MLX = -L ./minilibx_macos -lmlx -framework OpenGL -framework AppKit
-TESTCASE = io/test_maps/42.fdf
+TESTCASE = io/test_maps/t2_.fdf
 
 SRCDIR = src
 LIBDIR = custom_library

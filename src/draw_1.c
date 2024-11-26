@@ -6,12 +6,17 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 19:20:12 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/25 19:20:56 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/26 20:12:18 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
+/***
+ * @brief draw a pixel on the screen
+ * the pixel is a square of size PIXEL_SIZE
+ * the i and j are used to iterate over the square
+ */
 void	draw_pixel(t_data *data, int x, int y, int color)
 {
 	int	i;

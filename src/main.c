@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:43:36 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/26 16:26:09 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:05:48 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ void	fill_data(t_data *data, t_map_params *params)
 }
 
 /***
+ * @note we use two structures:
+ * params: to store the values from the file
+ * data: to store the infos about the mlx and window
+ * 
  * This is the main function of the program
  * It will follow the following steps:
  * 1. Check the number of arguments

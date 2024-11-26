@@ -6,7 +6,7 @@
 /*   By: azerfaou <azerfaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:50:44 by azerfaou          #+#    #+#             */
-/*   Updated: 2024/11/26 13:10:35 by azerfaou         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:21:03 by azerfaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ void		draw_vertical_line(t_data *data, t_2d_point p1, int color);
 // Events
 int			handle_keypress(int keysym, t_data *data);
 int			handle_destroy(t_data *data);
-void		clean_exit(t_data *data);
 
 // Maths
 size_t		ft_min(size_t a, size_t b);
