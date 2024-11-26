@@ -1,6 +1,6 @@
 CC = cc -g
 RM = rm -f
-EXE = fdf.exe
+EXE = fdf
 LIBNAME = custom_lib.a
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 VFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
