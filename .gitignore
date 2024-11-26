@@ -1,0 +1,16 @@
+.vscode
+*.py
+*.a *.o *.exe
+*.md
+
+# Folders
+io/*
+backup/
+Documentation/
+
+# Specific Files
+grid_mlx.c
+main_fdf.c
+test_fdf.c
+output.fdf
+fdf*
