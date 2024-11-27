@@ -2,10 +2,10 @@ CC = cc -g
 RM = rm -f
 EXE = fdf
 LIBNAME = custom_lib.a
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 VFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
 MLX = -L ./minilibx_macos -lmlx -framework OpenGL -framework AppKit
-TESTCASE = io/test_maps/t2_.fdf
+TESTCASE = io/test_maps/42.fdf
 
 SRCDIR = src
 LIBDIR = custom_library
@@ -20,7 +20,6 @@ OBJS = $(SRCS:.c=.o)
 all: lib $(EXE)
 
 lib: 
-	@$(MAKE) --no-print-directory fclean -C $(LIBDIR)
 	@$(MAKE) --no-print-directory all -C $(LIBDIR)
 	@echo "custom_lib library created."
 
